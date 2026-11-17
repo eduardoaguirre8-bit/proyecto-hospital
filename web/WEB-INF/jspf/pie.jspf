@@ -1,0 +1,8 @@
+    </main>
+    <footer class="footer-note">Hospital 2027 · Sistema de gestión de pacientes</footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="<%= ctx %>/js/app.js"></script>
+</body>
+</html>

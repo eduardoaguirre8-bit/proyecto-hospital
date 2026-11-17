@@ -1,0 +1,33 @@
+<%
+    // Usa la variable "p" (Paciente o null) y "accionForm" ("agregar" | "actualizar")
+    String vNom = p == null ? "" : Html.esc(p.getNombres());
+    String vApe = p == null ? "" : Html.esc(p.getApellidos());
+    String vPab = p == null ? "" : Html.esc(p.getPabellon());
+    String vCon = p == null ? "" : Html.esc(p.getConsultorio());
+    String vDoc = p == null ? "" : Html.esc(p.getDoctor());
+    String vObs = p == null ? "" : Html.esc(p.getObs());
+%>
+<form action="<%= ctx %>/PacienteServlet" method="post" data-confirm="<%= Html.esc(confirmaTitulo) %>"
+      data-text="Verifica que la información sea correcta antes de continuar." data-ok="<%= Html.esc(confirmaBoton) %>" novalidate>
+    <input type="hidden" name="accion" value="<%= accionForm %>">
+    <% if (p != null) { %><input type="hidden" name="id" value="<%= p.getId() %>"><% } %>
+    <div class="row g-4">
+        <div class="col-md-6"><label class="form-label" for="nombres">Nombres <span class="required">*</span></label>
+            <input class="form-control" id="nombres" name="nombres" type="text" maxlength="30" value="<%= vNom %>" placeholder="Ej. María José" required></div>
+        <div class="col-md-6"><label class="form-label" for="apellidos">Apellidos <span class="required">*</span></label>
+            <input class="form-control" id="apellidos" name="apellidos" type="text" maxlength="30" value="<%= vApe %>" placeholder="Ej. Quispe Ramos" required></div>
+        <div class="col-md-6"><label class="form-label" for="pabellon">Pabellón <span class="required">*</span></label>
+            <input class="form-control" id="pabellon" name="pabellon" type="text" maxlength="30" value="<%= vPab %>" placeholder="Ej. Pabellón A" required></div>
+        <div class="col-md-6"><label class="form-label" for="consultorio">Consultorio <span class="required">*</span></label>
+            <input class="form-control" id="consultorio" name="consultorio" type="text" maxlength="100" value="<%= vCon %>" placeholder="Ej. Consultorio 101" required></div>
+        <div class="col-12"><label class="form-label" for="doctor">Doctor <span class="required">*</span></label>
+            <input class="form-control" id="doctor" name="doctor" type="text" maxlength="50" value="<%= vDoc %>" placeholder="Ej. Dr. Ramírez" required></div>
+        <div class="col-12"><label class="form-label" for="obs">Observaciones</label>
+            <textarea class="form-control" id="obs" name="obs" rows="3" maxlength="100" data-contador="contObs" placeholder="Opcional (máx. 100 caracteres)"><%= vObs %></textarea>
+            <span class="contador" id="contObs">0 / 100</span></div>
+    </div>
+    <div class="form-actions">
+        <a class="btn btn-light" href="<%= ctx %>/PacienteServlet?accion=listar">Cancelar</a>
+        <button class="btn btn-primary" type="submit"><i class="bi bi-check2-circle me-2"></i><%= Html.esc(textoBoton) %></button>
+    </div>
+</form>
